@@ -1,0 +1,1 @@
+# go-struct-default-getter-codegen
