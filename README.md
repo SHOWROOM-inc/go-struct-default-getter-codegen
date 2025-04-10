@@ -6,10 +6,11 @@ This tool generates functions to get assigned or initial values for all structur
 Installation:
 ```shell 
 go install github.com/SHOWROOM-inc/go-struct-default-getter-codegen/cmd/default-getter-gen@latest 
-`` 
+``` 
 
 Running the command: 
-`` shell 
+
+```shell 
 default-getter-gen --input model.go --output model.gen.go --package package_name 
 ``` 
 
@@ -21,7 +22,7 @@ Returns the value or initial value of a pointer-type field for all structures de
 - If there is a `default` tag, the initial value is the value specified by the default tag.
 - If there is no `default` tag, then the initial value of the type is used.
 
-For example, if the input [live.go](. /examples/live.go) for input [live.gen.go](. /examples/live.gen.go).
+For example, if the input [live.go](./examples/live.go) for input [live.gen.go](./examples/live.gen.go).
 
 ---
 与えられたファイルに定義された全ての構造体のポインタ型のフィールドに対して、代入された値もしくは初期値を取得する関数を生成するツールです。
