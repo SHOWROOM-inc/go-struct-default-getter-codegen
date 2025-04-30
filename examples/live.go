@@ -8,3 +8,7 @@ type Live struct {
 	IsSpecial   *bool   `json:"is_special"`
 	IsAvailable *bool   `json:"is_available" default:"true"`
 }
+
+type LiveAliased Live
+
+type LiveIgnoreAliased = Live

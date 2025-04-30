@@ -39,3 +39,39 @@ func (r *Live) GetIsAvailable() bool {
 	return true
 }
 
+// ======= Getter methods for LiveAliased =======
+func (r *LiveAliased) GetLiveName() string {
+	if r.LiveName != nil {
+		return *r.LiveName
+	}
+	return ""
+}
+
+func (r *LiveAliased) GetStatus() string {
+	if r.Status != nil {
+		return *r.Status
+	}
+	return "preparing"
+}
+
+func (r *LiveAliased) GetLiveType() int64 {
+	if r.LiveType != nil {
+		return *r.LiveType
+	}
+	return 0
+}
+
+func (r *LiveAliased) GetIsSpecial() bool {
+	if r.IsSpecial != nil {
+		return *r.IsSpecial
+	}
+	return false
+}
+
+func (r *LiveAliased) GetIsAvailable() bool {
+	if r.IsAvailable != nil {
+		return *r.IsAvailable
+	}
+	return true
+}
+
