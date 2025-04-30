@@ -83,7 +83,12 @@ func searchStructs(node *ast.File) (structTypes map[string]*ast.StructType, alia
 			case *ast.StructType:
 				structTypes[typeSpec.Name.Name] = t
 			case *ast.Ident:
-				aliasTypes[typeSpec.Name.Name] = t.Name
+				// aliasされた型も対象とする。ただし型エイリアス(type alias)は対象外、別型名(define alias)のみ対象とする。
+				// - type alias: `type Struct2 = Struct1`　すなわち=で定義
+				// - define alias: `type Struct2 Struct1`　すなわち=なしで定義、こちらは別の型となる
+				if typeSpec.Assign == 0 {
+					aliasTypes[typeSpec.Name.Name] = t.Name
+				}
 			}
 		}
 	}
