@@ -156,7 +156,7 @@ func generateDefaultLiteral(val, typ string) string {
 	switch typ {
 	case "string":
 		return strconv.Quote(val)
-	case "int", "int64":
+	case "int", "int64", "float", "float32", "float64":
 		return val
 	case "bool":
 		l := strings.ToLower(val)
@@ -171,7 +171,7 @@ func defaultValueForType(typ string) string {
 	switch typ {
 	case "string":
 		return `""`
-	case "int", "int64":
+	case "int", "int64", "float", "float32", "float64":
 		return "0"
 	case "bool":
 		return "false"
