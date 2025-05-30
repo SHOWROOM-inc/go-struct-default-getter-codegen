@@ -39,6 +39,20 @@ func (r *Live) GetIsAvailable() bool {
 	return true
 }
 
+func (r *Live) GetRate() float64 {
+	if r.Rate != nil {
+		return *r.Rate
+	}
+	return 0
+}
+
+func (r *Live) GetDefaultRate() float64 {
+	if r.DefaultRate != nil {
+		return *r.DefaultRate
+	}
+	return 3.5
+}
+
 // ======= Getter methods for LiveAliased =======
 func (r *LiveAliased) GetLiveName() string {
 	if r.LiveName != nil {
@@ -75,3 +89,16 @@ func (r *LiveAliased) GetIsAvailable() bool {
 	return true
 }
 
+func (r *LiveAliased) GetRate() float64 {
+	if r.Rate != nil {
+		return *r.Rate
+	}
+	return 0
+}
+
+func (r *LiveAliased) GetDefaultRate() float64 {
+	if r.DefaultRate != nil {
+		return *r.DefaultRate
+	}
+	return 3.5
+}
