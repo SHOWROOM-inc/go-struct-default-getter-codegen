@@ -9,9 +9,6 @@ import (
 	"go/token"
 	"log"
 	"os"
-	"reflect"
-	"strconv"
-	"strings"
 	"unicode"
 )
 
@@ -115,23 +112,7 @@ func generateGettersForStruct(buf *bytes.Buffer, typeName string, structType *as
 		}
 		fieldType := ident.Name
 
-		// default タグの解析
-		defaultVal := ""
-		if field.Tag != nil {
-			tagValue, err := strconv.Unquote(field.Tag.Value)
-			if err == nil {
-				tag := reflect.StructTag(tagValue)
-				def := tag.Get("default")
-				if def != "" {
-					defaultVal = generateDefaultLiteral(def, fieldType)
-				}
-			}
-		}
-		if defaultVal == "" {
-			defaultVal = defaultValueForType(fieldType)
-		}
-
-		getters = append(getters, generateGetter(typeName, fieldName, fieldType, defaultVal))
+		getters = append(getters, generateGetter(typeName, fieldName, fieldType))
 	}
 
 	if len(getters) > 0 {
@@ -142,42 +123,14 @@ func generateGettersForStruct(buf *bytes.Buffer, typeName string, structType *as
 	}
 }
 
-func generateGetter(structName, fieldName, fieldType, defaultVal string) string {
-	methodName := "Get" + export(fieldName)
-	return fmt.Sprintf(`func (r *%s) %s() %s {
+func generateGetter(structName, fieldName, fieldType string) string {
+	methodName := "Get" + export(fieldName) + "OrDefault"
+	return fmt.Sprintf(`func (r *%s) %s(defaultValue %s) %s {
 	if r.%s != nil {
 		return *r.%s
 	}
-	return %s
-}`, structName, methodName, fieldType, fieldName, fieldName, defaultVal)
-}
-
-func generateDefaultLiteral(val, typ string) string {
-	switch typ {
-	case "string":
-		return strconv.Quote(val)
-	case "int", "int64", "float", "float32", "float64":
-		return val
-	case "bool":
-		l := strings.ToLower(val)
-		if l == "true" || l == "false" {
-			return l
-		}
-	}
-	return ""
-}
-
-func defaultValueForType(typ string) string {
-	switch typ {
-	case "string":
-		return `""`
-	case "int", "int64", "float", "float32", "float64":
-		return "0"
-	case "bool":
-		return "false"
-	default:
-		return typ + "{}"
-	}
+	return defaultValue
+}`, structName, methodName, fieldType, fieldType, fieldName, fieldName)
 }
 
 func export(s string) string {
