@@ -4,101 +4,102 @@ package examples
 // Getter methods generated from default tags and zero values.
 
 // ======= Getter methods for Live =======
-func (r *Live) GetLiveName() string {
+func (r *Live) GetLiveNameOrDefault(defaultValue string) string {
 	if r.LiveName != nil {
 		return *r.LiveName
 	}
-	return ""
+	return defaultValue
 }
 
-func (r *Live) GetStatus() string {
+func (r *Live) GetStatusOrDefault(defaultValue StatusType) StatusType {
 	if r.Status != nil {
 		return *r.Status
 	}
-	return "preparing"
+	return defaultValue
 }
 
-func (r *Live) GetLiveType() int64 {
+func (r *Live) GetLiveTypeOrDefault(defaultValue int64) int64 {
 	if r.LiveType != nil {
 		return *r.LiveType
 	}
-	return 0
+	return defaultValue
 }
 
-func (r *Live) GetIsSpecial() bool {
+func (r *Live) GetIsSpecialOrDefault(defaultValue bool) bool {
 	if r.IsSpecial != nil {
 		return *r.IsSpecial
 	}
-	return false
+	return defaultValue
 }
 
-func (r *Live) GetIsAvailable() bool {
+func (r *Live) GetIsAvailableOrDefault(defaultValue bool) bool {
 	if r.IsAvailable != nil {
 		return *r.IsAvailable
 	}
-	return true
+	return defaultValue
 }
 
-func (r *Live) GetRate() float64 {
+func (r *Live) GetRateOrDefault(defaultValue float64) float64 {
 	if r.Rate != nil {
 		return *r.Rate
 	}
-	return 0
+	return defaultValue
 }
 
-func (r *Live) GetDefaultRate() float64 {
+func (r *Live) GetDefaultRateOrDefault(defaultValue float64) float64 {
 	if r.DefaultRate != nil {
 		return *r.DefaultRate
 	}
-	return 3.5
+	return defaultValue
 }
 
 // ======= Getter methods for LiveAliased =======
-func (r *LiveAliased) GetLiveName() string {
+func (r *LiveAliased) GetLiveNameOrDefault(defaultValue string) string {
 	if r.LiveName != nil {
 		return *r.LiveName
 	}
-	return ""
+	return defaultValue
 }
 
-func (r *LiveAliased) GetStatus() string {
+func (r *LiveAliased) GetStatusOrDefault(defaultValue StatusType) StatusType {
 	if r.Status != nil {
 		return *r.Status
 	}
-	return "preparing"
+	return defaultValue
 }
 
-func (r *LiveAliased) GetLiveType() int64 {
+func (r *LiveAliased) GetLiveTypeOrDefault(defaultValue int64) int64 {
 	if r.LiveType != nil {
 		return *r.LiveType
 	}
-	return 0
+	return defaultValue
 }
 
-func (r *LiveAliased) GetIsSpecial() bool {
+func (r *LiveAliased) GetIsSpecialOrDefault(defaultValue bool) bool {
 	if r.IsSpecial != nil {
 		return *r.IsSpecial
 	}
-	return false
+	return defaultValue
 }
 
-func (r *LiveAliased) GetIsAvailable() bool {
+func (r *LiveAliased) GetIsAvailableOrDefault(defaultValue bool) bool {
 	if r.IsAvailable != nil {
 		return *r.IsAvailable
 	}
-	return true
+	return defaultValue
 }
 
-func (r *LiveAliased) GetRate() float64 {
+func (r *LiveAliased) GetRateOrDefault(defaultValue float64) float64 {
 	if r.Rate != nil {
 		return *r.Rate
 	}
-	return 0
+	return defaultValue
 }
 
-func (r *LiveAliased) GetDefaultRate() float64 {
+func (r *LiveAliased) GetDefaultRateOrDefault(defaultValue float64) float64 {
 	if r.DefaultRate != nil {
 		return *r.DefaultRate
 	}
-	return 3.5
+	return defaultValue
 }
+
