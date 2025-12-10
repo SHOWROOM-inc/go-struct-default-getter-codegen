@@ -9,6 +9,7 @@ import (
 	"go/token"
 	"log"
 	"os"
+	"sort"
 	"unicode"
 )
 
@@ -44,14 +45,24 @@ func process(node *ast.File, outputFile, packageName string) {
 	buf.WriteString("package " + packageName + "\n\n")
 	buf.WriteString("// Getter methods generated from default tags and zero values.\n\n")
 
-	// 構造体の初期値取得関数を生成
-	for typeName, structType := range structTypes {
-		generateGettersForStruct(&buf, typeName, structType)
+	// 構造体の初期値取得関数を生成（順序を安定させるためにキーをソート）
+	structTypeNames := make([]string, 0, len(structTypes))
+	for typeName := range structTypes {
+		structTypeNames = append(structTypeNames, typeName)
+	}
+	sort.Strings(structTypeNames)
+	for _, typeName := range structTypeNames {
+		generateGettersForStruct(&buf, typeName, structTypes[typeName])
 	}
 
-	// 型エイリアスに対しても初期値取得関数を生成
-	for aliasName, baseName := range aliasTypes {
-		if baseStruct, ok := structTypes[baseName]; ok {
+	// 型エイリアスに対しても初期値取得関数を生成（順序を安定させるためにキーをソート）
+	aliasTypeNames := make([]string, 0, len(aliasTypes))
+	for aliasName := range aliasTypes {
+		aliasTypeNames = append(aliasTypeNames, aliasName)
+	}
+	sort.Strings(aliasTypeNames)
+	for _, aliasName := range aliasTypeNames {
+		if baseStruct, ok := structTypes[aliasTypes[aliasName]]; ok {
 			generateGettersForStruct(&buf, aliasName, baseStruct)
 		}
 	}
